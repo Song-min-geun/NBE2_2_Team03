@@ -181,5 +181,5 @@
 <br>
 
 ## 🎞API 명세서
-
+- [API 명세서](https://desert-smoke-840.notion.site/API-1ba9bdd8da718007aa5bfb336e334a36)
 <br>
