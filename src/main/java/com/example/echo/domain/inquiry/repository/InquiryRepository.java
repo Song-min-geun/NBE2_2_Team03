@@ -1,0 +1,21 @@
+package com.example.echo.domain.inquiry.repository;
+
+import com.example.echo.domain.inquiry.dto.response.InquiryResponse;
+import com.example.echo.domain.inquiry.entity.Inquiry;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
+
+public interface InquiryRepository extends JpaRepository<Inquiry, Long>, InquiryPaging {
+
+    // ADMIN 회원의 모든 1:1 문의 리스트 페이징
+    @Query("select i from Inquiry i join fetch i.member im")
+    Page<InquiryResponse> findAllInquiriesAdmin(Pageable pageable);
+
+    @Query("select i from Inquiry i join fetch i.member im where im.memberId = :memberId")
+    Optional<Inquiry> findByIdWithMember(@Param("inquiryId") Long inquiryId);
+}
